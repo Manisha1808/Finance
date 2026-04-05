@@ -1,4 +1,4 @@
-# 💰 Finance Dashboard (Full Stack)
+# 💰 Finance Dashboard
 
 A modern full-stack finance dashboard designed to track financial records and visualize key metrics such as income, expenses, and balance.
 It combines a RESTful Flask backend with a React-based frontend, offering role-based access control, dynamic data updates, and an intuitive dashboard experience.
