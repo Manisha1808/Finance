@@ -171,6 +171,7 @@ Content-Type: application/json
   "date": "2026-04-03",
   "notes": "monthly salary"
 }
+```
 
 ---
 
