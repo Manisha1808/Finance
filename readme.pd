@@ -1,0 +1,265 @@
+#  Finance Dashboard Backend API
+
+This project was built as part of a backend assignment to design a finance dashboard system with role-based access control and analytics.
+
+---
+
+##  Features
+
+### 1. User & Role Management
+
+* Create and manage users
+* Assign roles: **Admin, Analyst, Viewer**
+* Activate / deactivate users
+* Role-based access control using middleware
+
+---
+
+### 2. Financial Records Management
+
+* Create, view, update, delete records
+* Fields:
+
+  * Amount
+  * Type (income / expense)
+  * Category
+  * Date
+  * Notes
+* Filtering support:
+
+  * By type
+  * By category
+
+---
+
+### 3. Dashboard APIs
+
+* Total income
+* Total expenses
+* Net balance
+* Category-wise breakdown
+* Recent transactions
+
+---
+
+### 4. Access Control
+
+* **Admin** → Full access
+* **Analyst** → View records + dashboard
+* **Viewer** → View-only
+
+Implemented using custom middleware (`role_required`)
+
+---
+
+### 5. Validation & Error Handling
+
+* Input validation for records
+* Type checking (amount, type)
+* Proper error messages
+* HTTP status codes (400, 403, 404, 500)
+
+---
+
+### 6. Data Persistence
+
+* SQLite database
+* SQLAlchemy ORM
+
+---
+
+##  Project Structure
+
+```
+finance-dashboard-backend/
+│
+├── app.py
+├── config.py
+│
+├── models/
+│   ├── user.py
+│   └── record.py
+│
+├── routes/
+│   ├── user_routes.py
+│   ├── record_routes.py
+│   └── dashboard_routes.py
+│
+├── services/
+│   ├── record_service.py
+│   └── dashboard_service.py
+│
+├── middleware/
+│   └── role_required.py
+│
+├── database/
+│   └── db.py
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone the repository
+
+```
+git clone <your-repo-url>
+cd finance-dashboard-backend
+```
+
+2. Create virtual environment
+
+```
+python -m venv venv
+venv\Scripts\activate   (Windows)
+```
+
+3. Install dependencies
+
+```
+pip install flask flask_sqlalchemy
+```
+
+4. Run the server
+
+```
+python app.py
+```
+
+The Server will start at:
+
+```
+http://127.0.0.1:5000/
+```
+
+---
+
+##  API Testing (IMPORTANT)
+
+Use tools like:
+
+* Thunder Client (VS Code)
+* Postman
+
+⚠️ Browser will NOT work (headers required)
+
+---
+
+##  Required Headers
+
+Every request must include:
+
+```
+User-Id: <user_id>
+Content-Type: application/json
+```
+
+## Sample Request
+
+POST /records
+
+Headers:
+```
+User-Id: 2
+Content-Type: application/json
+
+```json
+{
+  "amount": 3000,
+  "type": "income",
+  "category": "salary",
+  "date": "2026-04-03",
+  "notes": "monthly salary"
+}
+
+---
+
+## 📌 API Endpoints
+
+### 👤 Users
+
+| Method | Endpoint    | Description        |
+| ------ | ----------- | ------------------ |
+| POST   | /users      | Create user        |
+| GET    | /users      | Get all users      |
+| PATCH  | /users/<id> | Update role/status |
+
+---
+
+###  Records
+
+| Method | Endpoint      | Description   |
+| ------ | ------------- | ------------- |
+| POST   | /records      | Create record |
+| GET    | /records      | Get records   |
+| PUT    | /records/<id> | Update record |
+| DELETE | /records/<id> | Delete record |
+
+---
+
+###  Dashboard
+
+| Method | Endpoint            | Description              |
+| ------ | ------------------- | ------------------------ |
+| GET    | /dashboard/summary  | Income, expense, balance |
+| GET    | /dashboard/category | Category-wise totals     |
+| GET    | /dashboard/recent   | Recent transactions      |
+
+---
+
+## 🔄 Example Workflow (Demo)
+
+1. Create Admin user
+2. Use Admin (User-Id: 2) for all actions
+3. Create records
+4. Fetch dashboard summary
+5. Test role restrictions:
+
+   * Analyst cannot create users ❌
+   * Admin can perform all actions ✔
+
+---
+
+##  Design Decisions
+
+* Used **Flask + SQLAlchemy** for simplicity and scalability
+* Implemented **middleware-based RBAC**
+* Followed **separation of concerns**:
+
+  * Routes → API layer
+  * Services → Business logic
+  * Models → Database
+* Used **header-based authentication simulation** for simplicity
+
+---
+
+## ⚠️ Assumptions
+
+* Authentication is simulated using headers (`User-Id`)
+* No frontend included (backend-only assignment)
+* SQLite used for simplicity
+
+---
+
+## ⭐ Future Improvements
+
+* JWT Authentication
+* Soft delete
+* Unit tests
+
+---
+
+## Key Learnings
+
+- Implemented role-based access control using middleware
+- Designed a clean backend architecture with routes, services, and models
+- Handled validation, error responses, and edge cases
+- Built scalable APIs with pagination and search support
+
+---
+
+## 👩‍💻 Author
+
+Manisha Sen
+
+---
