@@ -1,10 +1,10 @@
-#  Finance Dashboard Backend API
+# 💰 Finance Dashboard (Full Stack)
+A modern full-stack finance dashboard designed to track financial records and visualize key metrics such as income, expenses, and balance.
 
-This project was built as part of a backend assignment to design a finance dashboard system with role-based access control and analytics.
-
+It combines a RESTful Flask backend with a React-based frontend, offering role-based access control, dynamic data updates, and an intuitive dashboard experience.
 ---
 
-##  Features
+## 🚀 Features
 
 ### 1. User & Role Management
 
@@ -18,6 +18,7 @@ This project was built as part of a backend assignment to design a finance dashb
 ### 2. Financial Records Management
 
 * Create, view, update, delete records
+
 * Fields:
 
   * Amount
@@ -25,24 +26,35 @@ This project was built as part of a backend assignment to design a finance dashb
   * Category
   * Date
   * Notes
-* Filtering support:
 
-  * By type
-  * By category
+* Filtering & search support
+
+* Pagination for record listing
 
 ---
 
-### 3. Dashboard APIs
+### 3. Dashboard & Analytics
 
 * Total income
 * Total expenses
 * Net balance
 * Category-wise breakdown
 * Recent transactions
+* **Interactive charts (Chart.js) for visualization**
 
 ---
 
-### 4. Access Control
+### 4. Frontend (React UI)
+
+* Built a **multi-page React application** using React Router
+* Implemented **sidebar-based navigation (SaaS-style layout)**
+* Designed clean UI with cards, tables, and forms
+* Real-time updates after add/delete operations using state management
+* Integrated backend APIs using fetch
+
+---
+
+### 5. Access Control
 
 * **Admin** → Full access
 * **Analyst** → View records + dashboard
@@ -52,7 +64,7 @@ Implemented using custom middleware (`role_required`)
 
 ---
 
-### 5. Validation & Error Handling
+### 6. Validation & Error Handling
 
 * Input validation for records
 * Type checking (amount, type)
@@ -61,72 +73,73 @@ Implemented using custom middleware (`role_required`)
 
 ---
 
-### 6. Data Persistence
+### 7. Data Persistence
 
 * SQLite database
 * SQLAlchemy ORM
 
 ---
 
-##  Project Structure
+## 🛠️ Tech Stack
+
+**Frontend**
+
+* React
+* React Router
+* Chart.js
+
+**Backend**
+
+* Flask
+* SQLAlchemy
+* SQLite
+
+---
+
+## 📂 Project Structure
 
 ```
-finance-dashboard-backend/
+finance-dashboard/
 │
-├── app.py
-├── config.py
+├── backend/
+│   ├── app.py
+│   ├── config.py
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── middleware/
+│   └── database/
 │
-├── models/
-│   ├── user.py
-│   └── record.py
-│
-├── routes/
-│   ├── user_routes.py
-│   ├── record_routes.py
-│   └── dashboard_routes.py
-│
-├── services/
-│   ├── record_service.py
-│   └── dashboard_service.py
-│
-├── middleware/
-│   └── role_required.py
-│
-├── database/
-│   └── db.py
+├── frontend/
+│   ├── src/
+│   ├── components/
+│   └── App.js
 ```
 
 ---
 
 ## ⚙️ Setup Instructions
 
-1. Clone the repository
+### 1. Clone the repository
 
 ```
 git clone <your-repo-url>
-cd finance-dashboard-backend
+cd your-repo-name
 ```
 
-2. Create virtual environment
+---
+
+### 2. Backend setup
 
 ```
+cd backend
 python -m venv venv
-venv\Scripts\activate   (Windows)
-```
-
-3. Install dependencies
-
-```
-pip install flask flask_sqlalchemy
-```
-
-4. Run the server
-
-```
+venv\Scripts\activate
+pip install flask flask_sqlalchemy flask_cors
 python app.py
 ```
 
-The Server will start at:
+Backend runs on:
 
 ```
 http://127.0.0.1:5000/
@@ -134,18 +147,23 @@ http://127.0.0.1:5000/
 
 ---
 
-##  API Testing (IMPORTANT)
+### 3. Frontend setup
 
-Use tools like:
+```
+cd frontend
+npm install
+npm start
+```
 
-* Thunder Client (VS Code)
-* Postman
+Frontend runs on:
 
-⚠️ Browser will NOT work (headers required)
+```
+http://localhost:3000/
+```
 
 ---
 
-##  Required Headers
+## 🔐 API Usage
 
 Every request must include:
 
@@ -154,24 +172,10 @@ User-Id: <user_id>
 Content-Type: application/json
 ```
 
-## Sample Request
-
-POST /records
-
-Headers:
-```
-User-Id: 2
-Content-Type: application/json
-
-```json
-{
-  "amount": 3000,
-  "type": "income",
-  "category": "salary",
-  "date": "2026-04-03",
-  "notes": "monthly salary"
-}
-```
+## Output Screenshots
+<img width="975" height="465" alt="image" src="https://github.com/user-attachments/assets/789b6d8e-6e0d-4482-bd37-0db33a904de7" />
+<img width="975" height="465" alt="image" src="https://github.com/user-attachments/assets/fc3e5894-53de-4c95-96f2-d4bce57b4bab" />
+<img width="975" height="472" alt="image" src="https://github.com/user-attachments/assets/9151ba83-6bfd-488b-ace2-a7212dd53fe9" />
 
 ---
 
@@ -187,7 +191,7 @@ Content-Type: application/json
 
 ---
 
-###  Records
+### 💳 Records
 
 | Method | Endpoint      | Description   |
 | ------ | ------------- | ------------- |
@@ -198,7 +202,7 @@ Content-Type: application/json
 
 ---
 
-###  Dashboard
+### 📊 Dashboard
 
 | Method | Endpoint            | Description              |
 | ------ | ------------------- | ------------------------ |
@@ -208,59 +212,63 @@ Content-Type: application/json
 
 ---
 
-## 🔄 Example Workflow (Demo)
+## 🔄 Example Workflow
 
 1. Create Admin user
-2. Use Admin (User-Id: 2) for all actions
-3. Create records
-4. Fetch dashboard summary
-5. Test role restrictions:
-
-   * Analyst cannot create users ❌
-   * Admin can perform all actions ✔
+2. Use Admin (`User-Id: 2`) for all actions
+3. Add financial records
+4. View dashboard analytics and charts
+5. Test role-based restrictions
 
 ---
 
-##  Design Decisions
+## 🧠 Design Decisions
 
-* Used **Flask + SQLAlchemy** for simplicity and scalability
+* Used **Flask + SQLAlchemy** for backend simplicity and scalability
+
 * Implemented **middleware-based RBAC**
+
 * Followed **separation of concerns**:
 
   * Routes → API layer
   * Services → Business logic
   * Models → Database
-* Used **header-based authentication simulation** for simplicity
+
+* Used **React Router for multi-page frontend navigation**
+
+* Implemented **state-based re-fetching for real-time UI updates**
 
 ---
 
 ## ⚠️ Assumptions
 
 * Authentication is simulated using headers (`User-Id`)
-* No frontend included (backend-only assignment)
 * SQLite used for simplicity
+* Application currently runs locally
 
 ---
 
 ## ⭐ Future Improvements
 
 * JWT Authentication
-* Soft delete
-* Unit tests
+* Deployment (Render / Vercel)
+* Advanced analytics (pie charts, trends)
+* Export reports (CSV/PDF)
+* Unit and integration tests
 
 ---
 
-## Key Learnings
+## 📌 Key Learnings
 
-- Implemented role-based access control using middleware
-- Designed a clean backend architecture with routes, services, and models
-- Handled validation, error responses, and edge cases
-- Built scalable APIs with pagination and search support
+* Built a complete full-stack system from backend to UI
+* Implemented role-based access control using middleware
+* Designed scalable API architecture
+* Integrated frontend with backend APIs
+* Managed state and real-time UI updates in React
+* Created a SaaS-style dashboard layout
 
 ---
 
 ## 👩‍💻 Author
 
 Manisha Sen
-
----
