@@ -19,7 +19,7 @@ function AddRecord({ onAdd }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "User-Id": 2
+        "User-Id": "2"
       },
       body: JSON.stringify({
         ...form,

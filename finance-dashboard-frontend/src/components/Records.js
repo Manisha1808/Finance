@@ -4,9 +4,9 @@ function Records({ refresh }) {
   const [records, setRecords] = useState([]);
 
   const fetchRecords = () => {
-    fetch("http://127.0.0.1:5000/records", {
+    fetch("https://finance-sntx.onrender.com/records", {
       headers: {
-        "User-Id": 2
+        "User-Id": "2"
       }
     })
       .then(res => res.json())
@@ -22,7 +22,7 @@ function Records({ refresh }) {
   }, [refresh]);
 
   const handleDelete = (id) => {
-    fetch(`http://127.0.0.1:5000/records/${id}`, {
+    fetch(`https://finance-sntx.onrender.com/records/${id}`, {
       method: "DELETE",
       headers: {
         "User-Id": 2

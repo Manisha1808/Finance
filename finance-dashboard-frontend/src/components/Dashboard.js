@@ -5,9 +5,9 @@ function Dashboard({ refresh }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/dashboard/summary", {
+    fetch("https://finance-sntx.onrender.com/dashboard/summary", {
       headers: {
-        "User-Id": 2
+        "User-Id": "2"
       }
     })
       .then(res => res.json())
