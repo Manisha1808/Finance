@@ -23,7 +23,8 @@ function AddRecord({ onAdd }) {
       },
       body: JSON.stringify({
         ...form,
-        amount: Number(form.amount)
+        amount: Number(form.amount),
+        date: new Date().toISOString().split("T")[0]
       })
     })
       .then(res => res.json())
