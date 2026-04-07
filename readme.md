@@ -4,6 +4,9 @@ A modern full-stack finance dashboard designed to track financial records and vi
 It combines a RESTful Flask backend with a React-based frontend, offering role-based access control, dynamic data updates, and an intuitive dashboard experience.
 
 ---
+Live Demo: https://finance-liart-sigma.vercel.app/records
+
+---
 
 ## 🚀 Features
 
